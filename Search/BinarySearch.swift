@@ -25,11 +25,7 @@ func binarySearchInRange<T: Comparable>(sequence: T[], value: T, min: Int, max: 
 
 	let middle = midpoint(min, max);
 
-	if value == sequence[middle]
-	{
-		return value
-	}
-	else if value < sequence[middle]
+	if value < sequence[middle]
 	{
 		return binarySearchInRange(sequence, value, min, middle - 1)
 	}
@@ -39,7 +35,8 @@ func binarySearchInRange<T: Comparable>(sequence: T[], value: T, min: Int, max: 
 	}
 	else
 	{
-		return nil
+		assert(value == sequence[middle])
+		return value
 	}
 }
 
@@ -63,12 +60,8 @@ func binarySearchInRangeIterative<T: Comparable>(sequence: T[], value: T, minInd
 		}
 
 		let middle = midpoint(min, max)
-	
-		if value == sequence[middle]
-		{
-			return value
-		}
-		else if value < sequence[middle]
+
+		if value < sequence[middle]
 		{
 			max = middle - 1
 		}
@@ -78,7 +71,8 @@ func binarySearchInRangeIterative<T: Comparable>(sequence: T[], value: T, minInd
 		}
 		else
 		{
-			return nil
+			assert(value == sequence[middle])
+			return value
 		}
 	}
 
