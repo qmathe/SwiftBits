@@ -8,13 +8,18 @@
 
 import Foundation
 
-func midpoint(min: Int, max: Int) -> Int
+func midpoint<T: Integer>(min: T, max: T) -> T
 {
 	assert(min <= max);
 	return min + (max - min) / 2
 }
 
-func binarySearchInRange<T: Comparable>(sequence: T[], value: T, min: Int, max: Int) -> T?
+/** 
+ * C.IndexType must be declared as Integer to support arithmetic computations
+ * such as midpoint() or assert(min <= max). As a counter example, 
+ * BidirectionalIndex supports navigation but not computation.
+ */
+func binarySearchInRange<C: Swift.Collection, T: Comparable where T == C.GeneratorType.Element, C.IndexType: Integer>(sequence: C, value: T, min: C.IndexType, max: C.IndexType) -> T?
 {
 	assert(min <= max);
 
@@ -40,12 +45,12 @@ func binarySearchInRange<T: Comparable>(sequence: T[], value: T, min: Int, max: 
 	}
 }
 
-func binarySearch<T: Comparable>(sequence: T[], value: T) -> T?
+func binarySearch<T: Comparable>(sequence: [T], value: T) -> T?
 {
 	return binarySearchInRange(sequence, value, 0, sequence.count - 1)
 }
 
-func binarySearchInRangeIterative<T: Comparable>(sequence: T[], value: T, minIndex: Int, maxIndex: Int) -> T?
+func binarySearchInRangeIterative<C: Swift.Collection, T: Comparable where T == C.GeneratorType.Element, C.IndexType: Integer>(sequence: C, value: T, minIndex: C.IndexType, maxIndex: C.IndexType) -> T?
 {
 	var min = minIndex;
 	var max = maxIndex;
